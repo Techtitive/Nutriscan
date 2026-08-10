@@ -8,11 +8,13 @@ import {
   FlatList,
   TextInput,
 } from 'react-native';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ThemeContext } from '../context/themeContext';
 
 export default function DetailsScreen({ route, navigation }) {
   const barcode = route.params?.barcode || 'No Barcode';
+  const { theme, themeName, changeTheme } = useContext(ThemeContext);
 
   const [product, setProduct] = useState(null);
   const { width, height } = Dimensions.get('window');
@@ -59,7 +61,7 @@ export default function DetailsScreen({ route, navigation }) {
 
   const title = {
     textAlign: 'left',
-    color: 'black',
+    color: theme.textInverse,
     fontWeight: 'bold',
     margin: 10,
     fontSize: 18,
@@ -389,7 +391,7 @@ export default function DetailsScreen({ route, navigation }) {
       <View
         style={{
           flex: 1,
-          backgroundColor: 'black',
+          backgroundColor: theme.background,
           justifyContent: 'center',
           alignItems: 'center',
         }}
@@ -397,7 +399,7 @@ export default function DetailsScreen({ route, navigation }) {
         <View
           style={{
             width: width * 0.8,
-            backgroundColor: 'white',
+            backgroundColor: theme.backgroundInverse,
             borderRadius: 10,
             padding: 20,
           }}
@@ -405,7 +407,7 @@ export default function DetailsScreen({ route, navigation }) {
           <View
             style={{
               height: 50,
-              backgroundColor: '#ddd',
+              backgroundColor: theme.mutedCard,
               borderRadius: 10,
               marginBottom: 20,
             }}
@@ -414,7 +416,7 @@ export default function DetailsScreen({ route, navigation }) {
           <View
             style={{
               height: 100,
-              backgroundColor: '#ddd',
+              backgroundColor: theme.mutedCard,
               borderRadius: 10,
               marginBottom: 15,
             }}
@@ -423,7 +425,7 @@ export default function DetailsScreen({ route, navigation }) {
           <View
             style={{
               height: 150,
-              backgroundColor: '#ddd',
+              backgroundColor: theme.mutedCard,
               borderRadius: 10,
               marginBottom: 15,
             }}
@@ -432,7 +434,7 @@ export default function DetailsScreen({ route, navigation }) {
           <View
             style={{
               height: 80,
-              backgroundColor: '#ddd',
+              backgroundColor: theme.mutedCard,
               borderRadius: 10,
             }}
           />
@@ -448,12 +450,12 @@ export default function DetailsScreen({ route, navigation }) {
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: 'black',
+          backgroundColor: theme.background,
         }}
       >
         <View
           style={{
-            backgroundColor: 'white',
+            backgroundColor: theme.backgroundInverse,
             width: width * 0.8,
             padding: 30,
             justifyContent: 'center',
@@ -463,7 +465,7 @@ export default function DetailsScreen({ route, navigation }) {
         >
           <Text
             style={{
-              color: 'red',
+              color: theme.error,
               fontSize: 25,
               fontWeight: 'bold',
               marginBottom: 20,
@@ -497,7 +499,7 @@ export default function DetailsScreen({ route, navigation }) {
     return (
       <View
         style={{
-          backgroundColor: 'black',
+          backgroundColor: theme.background,
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
@@ -506,7 +508,7 @@ export default function DetailsScreen({ route, navigation }) {
         <ScrollView
           style={{
             borderRadius: 10,
-            backgroundColor: 'white',
+            backgroundColor: theme.backgroundInverse,
             width: width * 0.8,
             maxHeight: height * 0.7,
             marginTop: 40,
@@ -521,7 +523,7 @@ export default function DetailsScreen({ route, navigation }) {
                 adjustsFontSizeToFit
                 numberOfLines={2}
                 style={{
-                  color: 'black',
+                  color: theme.textInverse,
                   fontSize: 50,
                   textAlign: 'center',
                   width: '90%',
@@ -538,7 +540,7 @@ export default function DetailsScreen({ route, navigation }) {
             <>
               <View
                 style={{
-                  backgroundColor: 'black',
+                  backgroundColor: theme.cardSecondary,
                   borderRadius: 15,
                   padding: 15,
                   marginBottom: 5,
@@ -613,7 +615,7 @@ export default function DetailsScreen({ route, navigation }) {
 
               <View
                 style={{
-                  backgroundColor: 'gray',
+                  backgroundColor: theme.cardSecondary,
                   borderRadius: 15,
                   padding: 10,
                   marginBottom: 5,
@@ -670,7 +672,7 @@ export default function DetailsScreen({ route, navigation }) {
               <Text style={title}>Allergen</Text>
               <View
                 style={{
-                  backgroundColor: 'gray',
+                  backgroundColor: theme.cardSecondary,
                   borderRadius: 15,
                   padding: 10,
                   marginBottom: 5,
@@ -678,7 +680,7 @@ export default function DetailsScreen({ route, navigation }) {
               >
                 <Text
                   style={{
-                    color: 'white',
+                    color: theme.textInverse,
                   }}
                 >
                   {`${product?.allergens}` || null}
@@ -702,7 +704,7 @@ export default function DetailsScreen({ route, navigation }) {
                 <TouchableOpacity onPress={() => setExpanded(!expanded)}>
                   <Text
                     style={{
-                      color: 'black',
+                      color: theme.textSecondary,
                     }}
                   >
                     {expanded ? 'Show Less ▲' : 'Show More ▼'}
@@ -712,7 +714,7 @@ export default function DetailsScreen({ route, navigation }) {
 
               <View
                 style={{
-                  backgroundColor: 'black',
+                  backgroundColor: theme.cardTertiary,
                   borderRadius: 15,
                   marginBottom: 25,
                 }}

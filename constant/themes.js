@@ -4,6 +4,8 @@ export const themes = {
 
     // Backgrounds
     background: '#000000',
+    backgroundInverse: '#ededed',
+    mutedCard: '#ddd',
     card: '#181818',
     cardSecondary: '#242424',
     cardTertiary: '#303030',
@@ -62,6 +64,8 @@ export const themes = {
     name: 'Dark',
 
     background: '#111111',
+    backgroundInverse: '#ededed',
+    mutedCard: '#ddd',
     card: '#1E1E1E',
     cardSecondary: '#2B2B2B',
     cardTertiary: '#353535',
@@ -110,6 +114,8 @@ export const themes = {
     name: 'Light',
 
     background: '#ededed',
+    backgroundInverse: '#000000',
+    mutedCard: '#ddd',
     card: '#ffffff',
     cardSecondary: '#777777',
     cardTertiary: '#787878',
@@ -118,7 +124,7 @@ export const themes = {
     secondary: '#3E8F00',
 
     text: '#111111',
-    textSecondary: '#444444',
+    textSecondary: '#5c5c5c',
     textMuted: '#525252',
     textInverse: '#FFFFFF',
 

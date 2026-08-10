@@ -32,33 +32,50 @@ export default function ScannerScreen({ navigation, route }) {
     return (
       <View
         style={{
-          backgroundColor: 'gray',
+          backgroundColor: theme.background,
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
+          paddingHorizontal: 30,
         }}
       >
         <Text
           style={{
-            fontSize: 20,
-            color: 'white',
+            fontSize: 22,
+            color: theme.text,
+            fontWeight: 'bold',
+            textAlign: 'center',
+            marginBottom: 10,
           }}
         >
-          Camera Permission not granted
+          Camera Permission Required
+        </Text>
+
+        <Text
+          style={{
+            color: theme.textSecondary,
+            textAlign: 'center',
+            marginBottom: 25,
+            fontSize: 15,
+          }}
+        >
+          NutriScan needs camera access to scan product barcodes.
         </Text>
 
         <TouchableOpacity
           style={{
-            backgroundColor: 'green',
-            padding: 15,
-            borderRadius: 10,
-            margin: 10,
+            backgroundColor: theme.button,
+            paddingVertical: 15,
+            paddingHorizontal: 30,
+            borderRadius: 14,
           }}
           onPress={requestPermission}
         >
           <Text
             style={{
-              color: 'white',
+              color: theme.buttonText,
+              fontWeight: 'bold',
+              fontSize: 16,
             }}
           >
             Grant Permission
@@ -131,7 +148,7 @@ export default function ScannerScreen({ navigation, route }) {
     >
       <Text
         style={{
-          color: theme.title,
+          color: theme.text,
           fontWeight: '600',
           fontSize: 18,
           margin: 8,
@@ -143,7 +160,7 @@ export default function ScannerScreen({ navigation, route }) {
       <CameraView
         style={{
           borderWidth: 3,
-          borderColor: theme.accent,
+          borderColor: theme.secondary,
           margin: 5,
           width: width * 0.78,
           height: width * 0.265,
@@ -196,7 +213,7 @@ export default function ScannerScreen({ navigation, route }) {
       >
         <Text
           style={{
-            color: theme.buttonText,
+            color: theme.text,
           }}
         >
           Go Back
