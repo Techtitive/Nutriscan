@@ -4,8 +4,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import * as NavigationBar from 'expo-navigation-bar';
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import HomeScreen from './screens/homescreen';
 import ScannerScreen from './screens/scanner';
@@ -17,16 +18,18 @@ import RecentsScreen from './screens/recents';
 import ToBuyRecentsScreen from './screens/tobuyRecents';
 import { ThemeProvider } from './context/themeContext';
 import { LinkProvider } from './context/linkContext';
+import { ThemeContext } from './context/themeContext';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function MainTabs() {
+  const { theme } = useContext(ThemeContext);
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: '#7CFC00',
-        tabBarInactiveTintColor: '#888',
+        tabBarActiveTintColor: theme.tabIconActive,
+        tabBarInactiveTintColor: theme.tabIcon,
 
         tabBarStyle: {
           position: 'absolute',
@@ -42,7 +45,7 @@ function MainTabs() {
 
           height: 65,
 
-          backgroundColor: '#353535',
+          backgroundColor: theme.tabBar,
 
           borderRadius: 30,
 
@@ -50,6 +53,21 @@ function MainTabs() {
 
           elevation: 10,
         },
+
+        headerStyle: {
+          backgroundColor: theme.card,
+        },
+
+        headerTintColor: theme.primary,
+
+        headerTitleStyle: {
+          color: theme.primary,
+          fontWeight: 'bold',
+          fontSize: 20,
+        },
+
+        headerShadowVisible: false,
+        headerTitleAlign: 'center',
       }}
     >
       <Tab.Screen
@@ -63,18 +81,6 @@ function MainTabs() {
               color={color}
             />
           ),
-          headerStyle: {
-            backgroundColor: '#181818',
-          },
-
-          headerTintColor: '#7CFC00',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-            fontSize: 20,
-          },
-
-          headerShadowVisible: false,
-          headerTitleAlign: 'center',
         }}
       />
 
@@ -89,18 +95,6 @@ function MainTabs() {
               color={color}
             />
           ),
-          headerStyle: {
-            backgroundColor: '#181818',
-          },
-
-          headerTintColor: '#7CFC00',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-            fontSize: 20,
-          },
-
-          headerShadowVisible: false,
-          headerTitleAlign: 'center',
         }}
       />
 
@@ -115,18 +109,6 @@ function MainTabs() {
               color={color}
             />
           ),
-          headerStyle: {
-            backgroundColor: '#181818',
-          },
-
-          headerTintColor: '#7CFC00',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-            fontSize: 20,
-          },
-
-          headerShadowVisible: false,
-          headerTitleAlign: 'center',
         }}
       />
 
@@ -141,18 +123,6 @@ function MainTabs() {
               color={color}
             />
           ),
-          headerStyle: {
-            backgroundColor: '#181818',
-          },
-
-          headerTintColor: '#7CFC00',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-            fontSize: 20,
-          },
-
-          headerShadowVisible: false,
-          headerTitleAlign: 'center',
         }}
       />
 
@@ -167,18 +137,6 @@ function MainTabs() {
               color={color}
             />
           ),
-          headerStyle: {
-            backgroundColor: '#181818',
-          },
-
-          headerTintColor: '#7CFC00',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-            fontSize: 20,
-          },
-
-          headerShadowVisible: false,
-          headerTitleAlign: 'center',
         }}
       />
     </Tab.Navigator>
@@ -186,24 +144,25 @@ function MainTabs() {
 }
 
 export default function App() {
+  const { theme } = useContext(ThemeContext);
   useEffect(() => {
     NavigationBar.setButtonStyleAsync('light');
   }, []);
 
   return (
     <>
-      <StatusBar style="light" backgroundColor="#181818" />
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <ThemeProvider>
+      <SafeAreaProvider>
+        <StatusBar style="light" backgroundColor="#181818" />
+        <GestureHandlerRootView style={{ flex: 1 }}>
           <LinkProvider>
             <NavigationContainer>
               <Stack.Navigator
                 screenOptions={{
                   headerStyle: {
-                    backgroundColor: '#181818',
+                    backgroundColor: theme.card,
                   },
 
-                  headerTintColor: '#7CFC00',
+                  headerTintColor: theme.primary,
                   headerTitleStyle: {
                     fontWeight: 'bold',
                     fontSize: 20,
@@ -236,8 +195,8 @@ export default function App() {
               </Stack.Navigator>
             </NavigationContainer>
           </LinkProvider>
-        </ThemeProvider>
-      </GestureHandlerRootView>
+        </GestureHandlerRootView>
+      </SafeAreaProvider>
     </>
   );
 }
