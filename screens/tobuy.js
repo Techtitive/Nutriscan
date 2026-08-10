@@ -875,15 +875,15 @@ export default function TobuyScreen({ navigation, route }) {
             >
               {[
                 {
-                  title: '📷 Scanner',
+                  title: '📷  Scanner',
                   screen: 'Scanner',
                 },
                 {
-                  title: '🕘 Recents',
+                  title: '🕘  Recents',
                   screen: 'Recents',
                 },
                 {
-                  title: '⭐ Favourites',
+                  title: '⭐  Favourites',
                   screen: 'Favourites',
                 },
               ].map((button) => (
@@ -907,7 +907,7 @@ export default function TobuyScreen({ navigation, route }) {
                 >
                   <Text
                     style={{
-                      color: theme.buttonText,
+                      color: theme.textSecondary,
                       fontWeight: 'bold',
                       textAlign: 'center',
                       fontSize: 16,
