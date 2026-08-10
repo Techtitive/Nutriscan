@@ -131,7 +131,10 @@ export default function TobuyScreen({ navigation, route }) {
       calories: 0,
     };
 
-    const updated = items.map((item) => {
+    const stored = await AsyncStorage.getItem('ToBuy');
+    const currentItems = stored ? JSON.parse(stored) : [];
+
+    const updated = currentItems.map((item) => {
       if (item.id !== id) return item;
 
       const nextBought = !item.bought;
@@ -292,7 +295,15 @@ export default function TobuyScreen({ navigation, route }) {
 
     let linkedRecent = null;
 
-    const updated = items.map((item) => {
+    console.log('id =', id);
+    console.log('items length =', items.length);
+    console.log('items =', items);
+
+    const stored = await AsyncStorage.getItem('ToBuy');
+    const currentItems = stored ? JSON.parse(stored) : [];
+
+    const updated = currentItems.map((item) => {
+      console.log('updated =', updated);
       if (item.id !== id) return item;
 
       const firstLink = !item.linked;
@@ -322,7 +333,7 @@ export default function TobuyScreen({ navigation, route }) {
     await saveItems(updated);
     setSelectedItemId(null);
 
-    const linkedItem = updated.find((i) => i.id === id);
+    const linkedItem = updated.find((i) => String(i.id) === String(id));
 
     if (linkedItem) {
       await upsertRecent(linkedItem);

@@ -6,6 +6,7 @@ import ErrorModal from '../components/modals/errorModal';
 import { StyleSheet } from 'react-native';
 import { themes } from '../constant/themes';
 import { ThemeContext } from '../context/themeContext';
+import { useLink } from '../context/linkContext';
 
 export default function ScannerScreen({ navigation, route }) {
   const { theme, themeName, changeTheme } = useContext(ThemeContext);
@@ -14,6 +15,8 @@ export default function ScannerScreen({ navigation, route }) {
   const [barcode, setBarcode] = useState('');
   const [showError, setShowError] = useState(false);
   const { width } = Dimensions.get('window');
+
+  const { linkMode, itemId, clearLink } = useLink();
 
   useEffect(() => {
     if (barcode) {
@@ -87,6 +90,7 @@ export default function ScannerScreen({ navigation, route }) {
   };
 
   // LINK PRODUCT TO TOBUY
+
   const linkScannedProduct = async (barcode) => {
     try {
       const response = await fetch(
@@ -94,65 +98,28 @@ export default function ScannerScreen({ navigation, route }) {
       );
 
       const data = await response.json();
-
-      const productName = data?.product?.product_name || 'Unknown Product';
-
-      const energy = Number(data?.product?.nutriments?.['energy-kcal']) || 0;
-
-      const stored = await AsyncStorage.getItem('ToBuy');
-
-      const items = stored ? JSON.parse(stored) : [];
-
-      const profile = JSON.parse(
-        await AsyncStorage.getItem('ProfileStats'),
-      ) || {
-        scanned: 0,
-        bought: 0,
-        calories: 0,
-      };
-
-      let scannedNew = false;
-
-      const updated = items.map((item) => {
-        if (item.id !== route.params.itemId) return item;
-
-        const firstLink = !item.linked;
-
-        if (firstLink) {
-          scannedNew = true;
-        }
-
-        if (firstLink && item.bought) {
-          profile.bought += 1;
-          profile.calories += energy;
-        }
-
-        return {
-          ...item,
-          linked: true,
-          barcode,
-          realName: productName,
-          energy,
-          addedAt: new Date().toISOString(),
-        };
-      });
-
-      if (scannedNew) {
-        profile.scanned += 1;
-      }
-
-      await AsyncStorage.setItem('ProfileStats', JSON.stringify(profile));
-
-      await AsyncStorage.setItem('ToBuy', JSON.stringify(updated));
+      console.log('SCANNER PARAMS', route.params);
+      console.log('ITEM ID', route.params?.itemId);
 
       navigation.navigate('MainTabs', {
         screen: 'ToBuy',
+        params: {
+          scannedProduct: {
+            barcode,
+            realName: data?.product?.product_name || 'Unknown Product',
+            customName: data?.product?.product_name || 'Unknown Product',
+            energy: Number(data?.product?.nutriments?.['energy-kcal']) || 0,
+          },
+          itemId,
+        },
       });
+      clearLink();
     } catch (e) {
       console.log(e);
       setShowError(true);
     }
   };
+
   return (
     <View
       style={{
@@ -191,7 +158,7 @@ export default function ScannerScreen({ navigation, route }) {
                 setScanned(true);
                 setBarcode(result.data);
 
-                if (route.params?.linkMode) {
+                if (linkMode && itemId) {
                   await linkScannedProduct(result.data);
                 } else {
                   await handleNormalScan(result.data);
