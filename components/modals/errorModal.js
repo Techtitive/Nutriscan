@@ -1,0 +1,94 @@
+import { Modal, View, Text, TouchableOpacity } from 'react-native';
+
+export default function ErrorModal({
+  visible,
+  icon = '❌',
+  title = 'Something went wrong',
+  message = '',
+  buttonText = 'Okay',
+  onClose,
+}) {
+  return (
+    <Modal
+      transparent
+      animationType="fade"
+      visible={visible}
+      onRequestClose={onClose}
+    >
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: 'rgba(0,0,0,0.7)',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: 25,
+        }}
+      >
+        <View
+          style={{
+            width: '100%',
+            backgroundColor: '#181818',
+            borderRadius: 30,
+            padding: 28,
+            alignItems: 'center',
+            borderWidth: 1,
+            borderColor: '#ff4444',
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 64,
+            }}
+          >
+            {icon}
+          </Text>
+
+          <Text
+            style={{
+              color: '#ff5555',
+              fontSize: 26,
+              fontWeight: 'bold',
+              marginTop: 12,
+            }}
+          >
+            {title}
+          </Text>
+
+          <Text
+            style={{
+              color: '#888',
+              textAlign: 'center',
+              marginTop: 12,
+              fontSize: 16,
+              lineHeight: 22,
+            }}
+          >
+            {message}
+          </Text>
+
+          <TouchableOpacity
+            onPress={onClose}
+            style={{
+              marginTop: 28,
+              width: '100%',
+              backgroundColor: '#ff4444',
+              paddingVertical: 16,
+              borderRadius: 18,
+              alignItems: 'center',
+            }}
+          >
+            <Text
+              style={{
+                color: 'white',
+                fontWeight: '700',
+                fontSize: 17,
+              }}
+            >
+              {buttonText}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </Modal>
+  );
+}
