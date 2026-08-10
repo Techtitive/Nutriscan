@@ -484,6 +484,12 @@ export default function TobuyScreen({ navigation, route }) {
           {/* RECENTS */}
 
           <TouchableOpacity
+            onPress={() => {
+              setItemId(selectedItemId);
+              setLinkMode(true);
+
+              navigation.navigate('ToBuyRecents');
+            }}
             style={{
               width: 50,
               height: 50,
@@ -498,12 +504,6 @@ export default function TobuyScreen({ navigation, route }) {
             }}
           >
             <Text
-              onPress={() => {
-                setItemId(selectedItemId);
-                setLinkMode(true);
-
-                navigation.navigate('ToBuyRecents');
-              }}
               style={{
                 color: theme.buttonText,
 
