@@ -16,6 +16,7 @@ import { useContext } from 'react';
 import { StyleSheet } from 'react-native';
 import ThemeModal from '../components/modals/themeModal';
 import { ThemeContext } from '../context/themeContext';
+import Settings from './screens/settings';
 
 export default function ProfileScreen() {
   const { theme, themeName, changeTheme } = useContext(ThemeContext);
@@ -601,7 +602,11 @@ export default function ProfileScreen() {
             gap: 10,
           }}
         >
-          <ActionCard icon="⚙" title="Settings" />
+          <ActionCard
+            icon="⚙"
+            title="Settings"
+            onPress={() => navigation.navigate('Settings')}
+          />
 
           <ActionCard
             icon="ℹ"

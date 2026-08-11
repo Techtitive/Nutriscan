@@ -192,6 +192,11 @@ export default function App() {
                   component={ToBuyRecentsScreen}
                   options={{ headerShown: true }}
                 />
+                <Stack.Screen
+                  name="Settings"
+                  component={Settings}
+                  options={{ headerShown: true }}
+                />
               </Stack.Navigator>
             </NavigationContainer>
           </LinkProvider>
