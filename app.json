@@ -31,6 +31,12 @@
         "projectId": "3713227a-f171-43fc-9233-b5641504e25e"
       }
     },
-    "owner": "techtitive"
+    "owner": "techtitive",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/3713227a-f171-43fc-9233-b5641504e25e"
+    }
   }
 }
