@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Nutriscan",
-    "slug": "Nutriscan",
+    "slug": "nutriscan",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -20,10 +20,17 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.nutriscan"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "3713227a-f171-43fc-9233-b5641504e25e"
+      }
+    },
+    "owner": "techtitive"
   }
 }
