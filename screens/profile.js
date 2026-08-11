@@ -684,7 +684,7 @@ export default function ProfileScreen() {
           >
             <Text
               style={{
-                color: theme.buttonText,
+                color: theme.text,
                 fontSize: 18,
               }}
             >
@@ -703,7 +703,7 @@ export default function ProfileScreen() {
           >
             <Text
               style={{
-                color: theme.buttonText,
+                color: theme.text,
                 fontSize: 18,
               }}
             >
