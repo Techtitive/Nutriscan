@@ -16,9 +16,9 @@ import { useContext } from 'react';
 import { StyleSheet } from 'react-native';
 import ThemeModal from '../components/modals/themeModal';
 import { ThemeContext } from '../context/themeContext';
-import Settings from './screens/settings';
+import Settings from './settings';
 
-export default function ProfileScreen() {
+export default function ProfileScreen({ navigation }) {
   const { theme, themeName, changeTheme } = useContext(ThemeContext);
   const BACKUP_DIR = FileSystem.documentDirectory + 'Backups/';
   const [showThemeModal, setShowThemeModal] = useState(false);
