@@ -3,46 +3,56 @@
     "name": "Nutriscan",
     "slug": "nutriscan",
     "version": "1.0.0",
+
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
+
     "icon": "./assets/icon.png",
+
     "plugins": [
       [
         "expo-splash-screen",
         {
           "backgroundColor": "#2A005C",
-          "image": "./assets/splash-icon.png",
+          "image": "./assets/splash-screen.png",
           "imageWidth": 220
         }
       ]
     ],
+
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.nutriscan"
+      "supportsTablet": true
     },
+
     "android": {
       "package": "com.nutriscan",
       "edgeToEdgeEnabled": true,
+
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundImage": "./assets/splash-screen.png"
+        "backgroundImage": "./assets/background.png"
       }
     },
+
     "web": {
       "favicon": "./assets/favicon.png"
     },
+
     "updates": {
       "url": "https://u.expo.dev/3713227a-f171-43fc-9233-b5641504e25e"
     },
+
     "runtimeVersion": {
       "policy": "appVersion"
     },
+
     "extra": {
       "eas": {
         "projectId": "3713227a-f171-43fc-9233-b5641504e25e"
       }
     },
+
     "owner": "techtitive"
   }
 }
