@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import * as NavigationBar from 'expo-navigation-bar';
+import { StatusBar } from 'expo-status-bar';
 
 import { ThemeContext } from './context/themeContext';
 
@@ -137,41 +138,53 @@ function MainTabs() {
 export default function AppNavigator() {
   const { theme } = useContext(ThemeContext);
 
+  const isDark = theme.background !== '#ededed';
+
   useEffect(() => {
-    NavigationBar.setButtonStyleAsync(
-      theme.background === '#ededed' ? 'dark' : 'light',
-    );
+    NavigationBar.setButtonStyleAsync(isDark ? 'light' : 'dark');
+    NavigationBar.setBackgroundColorAsync(theme.card);
   }, [theme]);
 
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: theme.card,
-        },
-
-        headerTintColor: theme.primary,
-
-        headerTitleStyle: {
-          color: theme.primary,
-          fontWeight: 'bold',
-          fontSize: 20,
-        },
-
-        headerShadowVisible: false,
-        headerTitleAlign: 'center',
-      }}
-    >
-      <Stack.Screen
-        name="MainTabs"
-        component={MainTabs}
-        options={{ headerShown: false }}
+    <>
+      <StatusBar
+        style={isDark ? 'light' : 'dark'}
+        backgroundColor={theme.card}
+        translucent={false}
       />
 
-      <Stack.Screen name="Scanner" component={ScannerScreen} />
-      <Stack.Screen name="Details" component={DetailsScreen} />
-      <Stack.Screen name="ToBuyRecents" component={ToBuyRecentsScreen} />
-      <Stack.Screen name="Settings" component={Settings} />
-    </Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: theme.card,
+          },
+
+          headerTintColor: theme.primary,
+
+          headerTitleStyle: {
+            color: theme.primary,
+            fontWeight: 'bold',
+            fontSize: 20,
+          },
+
+          headerShadowVisible: false,
+          headerTitleAlign: 'center',
+        }}
+      >
+        <Stack.Screen
+          name="MainTabs"
+          component={MainTabs}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen name="Scanner" component={ScannerScreen} />
+
+        <Stack.Screen name="Details" component={DetailsScreen} />
+
+        <Stack.Screen name="ToBuyRecents" component={ToBuyRecentsScreen} />
+
+        <Stack.Screen name="Settings" component={Settings} />
+      </Stack.Navigator>
+    </>
   );
 }
