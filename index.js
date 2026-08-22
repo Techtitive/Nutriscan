@@ -1,11 +1,14 @@
 import { registerRootComponent } from 'expo';
 import { ThemeProvider } from './context/themeContext';
+import { SettingsProvider } from './context/settingsContext';
 import App from './App';
 
 function Root() {
   return (
     <ThemeProvider>
-      <App />
+      <SettingsProvider>
+        <App />
+      </SettingsProvider>
     </ThemeProvider>
   );
 }
